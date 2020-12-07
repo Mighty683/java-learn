@@ -1,4 +1,4 @@
-package Engine;
+package Entities;
 
 public class Player extends Entity {
     public String playerName;
@@ -6,6 +6,12 @@ public class Player extends Entity {
     public void onDestroy() {
         System.out.println("Player destroyed");
     }
+
+    @Override
+    public boolean canMoveHere() {
+        return false;
+    }
+
     public static class Builder extends Entity.Builder<Builder> {
         String playerName;
 

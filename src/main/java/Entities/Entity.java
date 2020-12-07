@@ -1,6 +1,6 @@
-package Engine;
+package Entities;
 
-import java.math.BigInteger;
+import Entities.IEntity;
 
 public abstract class Entity implements IEntity {
     public int axisX;
