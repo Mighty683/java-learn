@@ -15,4 +15,9 @@ public class DamageLocationEvent extends LocationEvent {
     public void applyEffect(IDamageableEntity entity) {
         entity.applyDamage(damage);
     }
+
+    @Override
+    public Location getLocation() {
+        return this.location;
+    }
 }

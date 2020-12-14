@@ -3,8 +3,10 @@ package Engine;
 import Engine.Entities.EntityFactory;
 import Engine.Entities.Player;
 import Engine.Events.DamageLocationEvent;
+import Engine.Events.MoveEntityEvent;
 import Engine.Utils.Location;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -12,6 +14,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 public class EngineTest {
+    @Mock
+    Location location;
     @Test
     public void addingEntities() {
         //given
@@ -38,5 +42,16 @@ public class EngineTest {
 
         //then
         verify(eventMock, times(1)).applyEffect(playerMock);
+    }
+    @Test
+    public void tickMoveEffects() {
+        //given
+        Engine testedEngine = new Engine();
+        MoveEntityEvent eventMock = mock(MoveEntityEvent.class);
+        testedEngine.addMoveEvent(eventMock);
+        //when
+        testedEngine.tick();
+        //then
+        verify(eventMock, times(1)).applyMoveEffect();
     }
 }
