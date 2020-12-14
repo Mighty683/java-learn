@@ -18,14 +18,11 @@ public class Engine implements IEngine {
 
     private void applyLocationEffects() {
         this.locationEvents
-                .stream()
-                .forEach(effect -> {
-                    this.entities.stream().forEach(entity -> {
-                        if (entity instanceof IDamageableEntity) {
-                            effect.applyEffect((IDamageableEntity) entity);
-                        }
-                    });
-                });
+                .forEach(effect -> this.entities.forEach(entity -> {
+                    if (entity instanceof IDamageableEntity) {
+                        effect.applyEffect((IDamageableEntity) entity);
+                    }
+                }));
     }
 
     @Override

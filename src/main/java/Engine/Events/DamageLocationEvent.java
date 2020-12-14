@@ -4,7 +4,7 @@ import Engine.Entities.IDamageableEntity;
 import Utils.Location;
 
 public class DamageLocationEvent extends LocationEvent {
-    private int damage;
+    private final int damage;
 
     public DamageLocationEvent (int damage, Location location) {
         super(location);
