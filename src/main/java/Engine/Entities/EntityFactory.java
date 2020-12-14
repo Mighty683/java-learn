@@ -1,6 +1,6 @@
 package Engine.Entities;
 
-import Utils.Location;
+import Engine.Utils.Location;
 
 public class EntityFactory {
     public static Player createPlayer(Location location, int hp, String playerName) {

@@ -1,12 +1,20 @@
 package Engine.Entities;
 
-import Utils.Location;
+import Engine.Utils.Location;
 
 public abstract class Entity implements IEntity {
-    public Location location;
-    public String name;
+    private Location location;
+    private String name;
     public Entity(Location location, String name) {
         this.location = location;
         this.name = name;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 }

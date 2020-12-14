@@ -1,7 +1,7 @@
 package Engine.Events;
 
 import Engine.Entities.IDamageableEntity;
-import Utils.Location;
+import Engine.Utils.Location;
 
 public class DamageLocationEvent extends LocationEvent {
     private final int damage;

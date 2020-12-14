@@ -1,7 +1,7 @@
 package Engine.Events;
 
 import Engine.Entities.Player;
-import Utils.Location;
+import Engine.Utils.Location;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;

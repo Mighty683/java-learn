@@ -3,7 +3,7 @@ package Engine;
 import Engine.Entities.EntityFactory;
 import Engine.Entities.Player;
 import Engine.Events.DamageLocationEvent;
-import Utils.Location;
+import Engine.Utils.Location;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

@@ -1,6 +1,6 @@
 package Engine.Events;
 
-import Utils.Location;
+import Engine.Utils.Location;
 
 public abstract class LocationEvent implements IDamageEvent {
     public Location location;

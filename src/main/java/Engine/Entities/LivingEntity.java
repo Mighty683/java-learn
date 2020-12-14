@@ -1,8 +1,8 @@
 package Engine.Entities;
 
-import Utils.Location;
+import Engine.Utils.Location;
 
-public class LivingEntity extends Entity implements IDamageableEntity {
+public abstract class LivingEntity extends Entity implements IDamageableEntity, IMovableEntity {
     private int hp;
     private boolean alive;
 
@@ -12,14 +12,18 @@ public class LivingEntity extends Entity implements IDamageableEntity {
     }
 
     @Override
-    public boolean canMoveHere() {
-        return false;
-    }
-
-    @Override
     public void applyDamage(int damage) {
         this.hp = this.hp - damage;
         this.alive = this.hp > 0;
+    }
+
+    @Override
+    public void move(Location location) {
+        this.setLocation(location);
+    }
+
+    public int getHp() {
+        return hp;
     }
 
     public boolean isAlive() {
