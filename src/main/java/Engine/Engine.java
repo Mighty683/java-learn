@@ -1,30 +1,39 @@
 package Engine;
 
-import Entities.IEntity;
+import Engine.Entities.Entity;
+import Engine.Entities.IDamageableEntity;
+import Engine.Events.LocationEvent;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Engine implements IEngine {
-    Collection<IEntity> entites;
-    public Engine(Collection<IEntity> entities) {
-        this.entites = entities;
-    }
+    List<Entity> entities = new ArrayList<>();
+    List<LocationEvent> locationEvents = new ArrayList<>();
 
     @Override
     public void tick() {
-        this.entites.forEach((entity) -> {
-            // How implement tick effects?
-        });
+        applyLocationEffects();
+    }
+
+    private void applyLocationEffects() {
+        this.locationEvents
+                .stream()
+                .forEach(effect -> {
+                    this.entities.stream().forEach(entity -> {
+                        if (entity instanceof IDamageableEntity) {
+                            effect.applyEffect((IDamageableEntity) entity);
+                        }
+                    });
+                });
     }
 
     @Override
-    public void addEntity(IEntity entity) {
-        this.entites.add(entity);
+    public void addEntity(Entity entity) {
+        this.entities.add(entity);
     }
 
-    @Override
-    public void addEntitiesList(Collection<IEntity> list) {
-        this.entites.addAll(list);
+    public void addLocationEvent(LocationEvent locationEvent) {
+        this.locationEvents.add(locationEvent);
     }
 }

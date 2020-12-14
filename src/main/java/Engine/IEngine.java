@@ -1,11 +1,12 @@
 package Engine;
 
-import Entities.IEntity;
+import Engine.Entities.Entity;
+import Engine.Events.LocationEvent;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface IEngine {
     void tick();
-    void addEntity(IEntity entity);
-    void addEntitiesList(Collection<IEntity> list);
+    void addEntity(Entity entity);
+    void addLocationEvent(LocationEvent locationEvent);
 }

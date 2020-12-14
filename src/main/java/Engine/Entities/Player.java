@@ -1,0 +1,17 @@
+package Engine.Entities;
+
+import Utils.Location;
+
+public class Player extends LivingEntity {
+    public String playerName;
+
+    @Override
+    public boolean canMoveHere() {
+        return false;
+    }
+
+    protected Player(Location location, int hp, String playerName) {
+        super(location, "player", hp);
+        this.playerName = playerName;
+    }
+}

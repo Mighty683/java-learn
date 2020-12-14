@@ -1,6 +1,5 @@
-package Entities;
+package Engine.Entities;
 
 public interface IEntity {
-    void onDestroy();
     boolean canMoveHere();
 }
