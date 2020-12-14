@@ -10,7 +10,7 @@ public class Player extends LivingEntity {
         return false;
     }
 
-    protected Player(Location location, int hp, String playerName) {
+    public Player(Location location, int hp, String playerName) {
         super(location, "player", hp);
         this.playerName = playerName;
     }

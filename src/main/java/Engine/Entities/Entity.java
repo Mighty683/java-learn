@@ -5,7 +5,7 @@ import Engine.Utils.Location;
 public abstract class Entity implements IEntity {
     private Location location;
     private String name;
-    public Entity(Location location, String name) {
+    protected Entity(Location location, String name) {
         this.location = location;
         this.name = name;
     }
@@ -15,6 +15,6 @@ public abstract class Entity implements IEntity {
     }
 
     public Location getLocation() {
-        return location;
+        return this.location;
     }
 }

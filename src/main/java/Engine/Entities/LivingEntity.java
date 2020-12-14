@@ -6,7 +6,7 @@ public abstract class LivingEntity extends Entity implements IDamageableEntity, 
     private int hp;
     private boolean alive;
 
-    public LivingEntity(Location location, String name, int hp) {
+    protected LivingEntity(Location location, String name, int hp) {
         super(location, name);
         this.hp = hp;
     }
