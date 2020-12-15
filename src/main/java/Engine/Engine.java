@@ -6,6 +6,7 @@ import Engine.Events.IMoveEvent;
 import Engine.Events.LocationEvent;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Engine implements IEngine {
@@ -19,6 +20,21 @@ public class Engine implements IEngine {
         applyMoveEvents();
     }
 
+    @Override
+    public void addEntity(Entity entity) {
+        this.entities.add(entity);
+    }
+
+    @Override
+    public void addLocationEvent(LocationEvent locationEvent) {
+        this.locationEvents.add(locationEvent);
+    }
+
+    @Override
+    public void addMoveEvent(IMoveEvent event) {
+        this.moveEvents.add(event);
+    }
+
     private void applyLocationEvents() {
         this.locationEvents
                 .forEach(event -> this.entities.forEach(entity -> {
@@ -29,19 +45,15 @@ public class Engine implements IEngine {
     }
 
     private void applyMoveEvents() {
-        this.moveEvents.forEach(event -> event.applyMoveEffect());
-    }
-
-    @Override
-    public void addEntity(Entity entity) {
-        this.entities.add(entity);
-    }
-
-    public void addLocationEvent(LocationEvent locationEvent) {
-        this.locationEvents.add(locationEvent);
-    }
-    @Override
-    public void addMoveEvent(IMoveEvent event) {
-        this.moveEvents.add(event);
+        Iterator<IMoveEvent> iterator = this.moveEvents.iterator();
+        while(iterator.hasNext()) {
+            IMoveEvent event = iterator.next();
+            if (this.entities.stream().allMatch(
+                    entity -> entity.getLocation().equals(event.getLocation()) && entity.canMoveHere())
+            ) {
+                event.applyMoveEffect();
+            }
+            iterator.remove();
+        }
     }
 }

@@ -15,4 +15,9 @@ public class MoveEntityEvent implements IMoveEvent {
     public void applyMoveEffect() {
         entity.move(location);
     }
+
+    @Override
+    public Location getLocation() {
+        return this.location;
+    }
 }
