@@ -1,4 +1,9 @@
 package Server;
 
-public interface IGameRoom extends AutoCloseable {
+import java.util.Set;
+
+public interface IGameRoom {
+    void addPlayer(IPlayerSocket socket);
+    void removePlayer(IPlayerSocket socket);
+    Set<IPlayerSocket> getPlayersSet();
 }
