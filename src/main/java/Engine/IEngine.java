@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface IEngine {
     void tick();
+
     void addEntity(Entity entity);
+
     void addLocationEvent(LocationEvent locationEvent);
+
     void addMoveEvent(IMoveEvent moveEvent);
 }

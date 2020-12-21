@@ -1,13 +1,21 @@
-package Server;
+package Server.GameRoom;
+
+
+import Server.IPlayerSocket;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class GameRoom implements IGameRoom {
     private final Set<IPlayerSocket> playerSocketSet;
-    public GameRoom () {
+    private final UUID id;
+
+    public GameRoom() {
         this.playerSocketSet = new LinkedHashSet<>();
+        this.id = UUID.randomUUID();
     }
+
     @Override
     public void addPlayer(IPlayerSocket socket) {
         this.playerSocketSet.add(socket);
@@ -21,5 +29,10 @@ public class GameRoom implements IGameRoom {
     @Override
     public Set<IPlayerSocket> getPlayersSet() {
         return this.playerSocketSet;
+    }
+
+    @Override
+    public UUID getId() {
+        return this.id;
     }
 }

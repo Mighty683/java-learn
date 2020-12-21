@@ -7,7 +7,8 @@ import java.util.Objects;
 
 public class PlayerSocket implements IPlayerSocket {
     private final WebSocket socket;
-    public PlayerSocket (WebSocket socket) {
+
+    public PlayerSocket(WebSocket socket) {
         this.socket = socket;
     }
 

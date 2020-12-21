@@ -46,7 +46,7 @@ public class Engine implements IEngine {
 
     private void applyMoveEvents() {
         Iterator<IMoveEvent> iterator = this.moveEvents.iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             IMoveEvent event = iterator.next();
             if (this.entities.stream().allMatch(
                     entity -> entity.getLocation().equals(event.getLocation()) && entity.canMoveHere())

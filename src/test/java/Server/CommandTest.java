@@ -24,8 +24,9 @@ public class CommandTest {
                     + "\"cmd\": \"commandWithData\","
                     + "\"data\": {"
                     + "\"key1\": \"value1\","
-                    + "\"key2\": \"value2\""
-                    + "}}"
+                    + "\"key2\": \"value2\"d"
+                    + "}"
+                    + "}"
             );
             assertThat(testCommand.command).isEqualTo("commandWithData");
             assertThat(testCommand.data.get("key1")).isEqualTo("value1");

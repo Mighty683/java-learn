@@ -5,5 +5,6 @@ import Engine.Utils.Location;
 
 public interface IDamageEvent {
     void applyEffect(IDamageableEntity entity);
+
     Location getLocation();
 }

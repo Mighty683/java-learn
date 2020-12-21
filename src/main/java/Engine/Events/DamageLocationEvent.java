@@ -6,7 +6,7 @@ import Engine.Utils.Location;
 public class DamageLocationEvent extends LocationEvent {
     private final int damage;
 
-    public DamageLocationEvent (int damage, Location location) {
+    public DamageLocationEvent(int damage, Location location) {
         super(location);
         this.damage = damage;
     }
