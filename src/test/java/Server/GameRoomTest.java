@@ -14,23 +14,25 @@ public class GameRoomTest {
     public class PlayerManagement {
         @Test
         void addingPlayer() {
-            GameRoom testRoom = new GameRoom();
-            IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
+            final GameRoom testRoom = new GameRoom();
+            final IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
             testRoom.addPlayer(mockPlayer);
             assertThat(testRoom.getPlayersSet()).contains(mockPlayer);
         }
+
         @Test
         void removingPlayer() {
-            GameRoom testRoom = new GameRoom();
-            IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
+            final GameRoom testRoom = new GameRoom();
+            final IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
             testRoom.addPlayer(mockPlayer);
             testRoom.removePlayer(mockPlayer);
             assertThat(testRoom.getPlayersSet()).doesNotContain(mockPlayer);
         }
+
         @Test
         void avoidDuplicates() {
-            GameRoom testRoom = new GameRoom();
-            IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
+            final GameRoom testRoom = new GameRoom();
+            final IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
             testRoom.addPlayer(mockPlayer);
             testRoom.addPlayer(mockPlayer);
             assertThat(testRoom.getPlayersSet()).contains(mockPlayer);

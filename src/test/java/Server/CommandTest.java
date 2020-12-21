@@ -13,21 +13,26 @@ public class CommandTest {
     @DisplayName("Testing json parsing")
     class FromJSONParse {
         @Test
-        void commandParse () throws IOException {
-            Command testCommand = Command.fromJSONString("{\"cmd\":\"command\"}");
+        void commandParse() throws IOException {
+            //when
+            final Command testCommand = Command.fromJSONString("{\"cmd\":\"command\"}");
+            //then
             assertThat(testCommand.command).isEqualTo("command");
         }
+
         @Test
         void dataParse() throws IOException {
-            Command testCommand = Command.fromJSONString(
+            //when
+            final Command testCommand = Command.fromJSONString(
                     "{"
-                    + "\"cmd\": \"commandWithData\","
-                    + "\"data\": {"
-                    + "\"key1\": \"value1\","
-                    + "\"key2\": \"value2\"d"
-                    + "}"
-                    + "}"
+                            + "\"cmd\": \"commandWithData\","
+                            + "\"data\": {"
+                            + "\"key1\": \"value1\","
+                            + "\"key2\": \"value2\"d"
+                            + "}"
+                            + "}"
             );
+            //then
             assertThat(testCommand.command).isEqualTo("commandWithData");
             assertThat(testCommand.data.get("key1")).isEqualTo("value1");
             assertThat(testCommand.data.get("key2")).isEqualTo("value2");

@@ -21,8 +21,8 @@ public class ServerTest {
         @Test
         void createGame() {
             //given
-            Server testServer = new Server(inetSocketAddressMock);
-            IPlayerSocket playerSocketMock = mock(IPlayerSocket.class);
+            final Server testServer = new Server(inetSocketAddressMock);
+            final IPlayerSocket playerSocketMock = mock(IPlayerSocket.class);
             //when
             testServer.onCommand(
                     playerSocketMock,
@@ -34,15 +34,16 @@ public class ServerTest {
             //then
             assertThat(testServer.getGameRoomMap().values().iterator().next().getPlayersSet()).contains(playerSocketMock);
         }
+
         @Test
         void joinGame() {
             //given
-            Server testServer = new Server(inetSocketAddressMock);
-            IPlayerSocket playerSocketMock = mock(IPlayerSocket.class);
-            IPlayerSocket playerJoiningSocketMock = mock(IPlayerSocket.class);
+            final Server testServer = new Server(inetSocketAddressMock);
+            final IPlayerSocket playerSocketMock = mock(IPlayerSocket.class);
+            final IPlayerSocket playerJoiningSocketMock = mock(IPlayerSocket.class);
             testServer.onCommand(playerSocketMock, new Command(CommandsEnum.CREATE_GAME.toString(), new HashMap<>()));
-            IGameRoom gameRoom = testServer.getGameRoomMap().values().iterator().next();
-            Map<String, String> dataMap = new HashMap<>();
+            final IGameRoom gameRoom = testServer.getGameRoomMap().values().iterator().next();
+            final Map<String, String> dataMap = new HashMap<>();
             dataMap.put("id", gameRoom.getId().toString());
             //when
             testServer.onCommand(
