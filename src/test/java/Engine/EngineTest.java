@@ -4,6 +4,7 @@ import Engine.Entities.InterfaceMovableEntity;
 import Engine.Entities.Player;
 import Engine.Events.DamageLocationEvent;
 import Engine.Events.MoveEntityEvent;
+import Engine.Utils.DirectionEnum;
 import Engine.Utils.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +34,18 @@ public class EngineTest {
 
         //then
         assertThat(testedEngine.entities).contains(player);
+    }
+
+    @Test
+    public void moveInDirection() {
+        final Engine testedEngine = new Engine();
+        final Player playerMock = spy(new Player(testLocation, 100, "player-name"));
+        testedEngine.moveEntityInDirection(playerMock, DirectionEnum.UP);
+        assertThat(testedEngine.moveEvents.size()).isEqualTo(1);
+        assertThat(testedEngine.moveEvents.get(0)).isEqualTo(new MoveEntityEvent(
+                DirectionEnum.UP.getNewLocation(testLocation),
+                playerMock
+        ));
     }
 
     @Nested

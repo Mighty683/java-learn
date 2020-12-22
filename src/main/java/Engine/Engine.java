@@ -2,8 +2,11 @@ package Engine;
 
 import Engine.Entities.InterfaceDamageableEntity;
 import Engine.Entities.InterfaceEntity;
+import Engine.Entities.InterfaceMovableEntity;
 import Engine.Events.InterfaceDamageLocationEvent;
 import Engine.Events.InterfaceMoveEvent;
+import Engine.Events.MoveEntityEvent;
+import Engine.Utils.DirectionEnum;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,6 +41,16 @@ public class Engine implements InterfaceEngine {
     @Override
     public void addMoveEvent(final InterfaceMoveEvent event) {
         this.moveEvents.add(event);
+    }
+
+    @Override
+    public void moveEntityInDirection(final InterfaceEntity entity, final DirectionEnum direction) {
+        this.addMoveEvent(
+                new MoveEntityEvent(
+                        direction.getNewLocation(entity.getLocation()),
+                        (InterfaceMovableEntity) entity
+                )
+        );
     }
 
     private void applyLocationEvents() {
