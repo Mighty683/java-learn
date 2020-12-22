@@ -1,5 +1,6 @@
 package Server;
 
+import Server.Command.Command;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ public class CommandTest {
             //when
             final Command testCommand = Command.fromJSONString("{\"cmd\":\"command\"}");
             //then
-            assertThat(testCommand.command).isEqualTo("command");
+            assertThat(testCommand.getCommand()).isEqualTo("command");
         }
 
         @Test
@@ -33,9 +34,9 @@ public class CommandTest {
                             + "}"
             );
             //then
-            assertThat(testCommand.command).isEqualTo("commandWithData");
-            assertThat(testCommand.data.get("key1")).isEqualTo("value1");
-            assertThat(testCommand.data.get("key2")).isEqualTo("value2");
+            assertThat(testCommand.getCommand()).isEqualTo("commandWithData");
+            assertThat(testCommand.getData().get("key1")).isEqualTo("value1");
+            assertThat(testCommand.getData().get("key2")).isEqualTo("value2");
         }
     }
 }

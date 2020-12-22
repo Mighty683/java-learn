@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class GameRoomTest {
+
     @Nested
     @DisplayName("Test player management")
     public class PlayerManagement {
@@ -17,7 +18,7 @@ public class GameRoomTest {
             final GameRoom testRoom = new GameRoom();
             final IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
             testRoom.addPlayer(mockPlayer);
-            assertThat(testRoom.getPlayersSet()).contains(mockPlayer);
+            assertThat(testRoom.getPlayerSocketCollection()).contains(mockPlayer);
         }
 
         @Test
@@ -26,7 +27,7 @@ public class GameRoomTest {
             final IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
             testRoom.addPlayer(mockPlayer);
             testRoom.removePlayer(mockPlayer);
-            assertThat(testRoom.getPlayersSet()).doesNotContain(mockPlayer);
+            assertThat(testRoom.getPlayerSocketCollection()).doesNotContain(mockPlayer);
         }
 
         @Test
@@ -35,8 +36,8 @@ public class GameRoomTest {
             final IPlayerSocket mockPlayer = mock(IPlayerSocket.class);
             testRoom.addPlayer(mockPlayer);
             testRoom.addPlayer(mockPlayer);
-            assertThat(testRoom.getPlayersSet()).contains(mockPlayer);
-            assertThat(testRoom.getPlayersSet().size()).isEqualTo(1);
+            assertThat(testRoom.getPlayerSocketCollection()).contains(mockPlayer);
+            assertThat(testRoom.getPlayerSocketCollection().size()).isEqualTo(1);
         }
     }
 }

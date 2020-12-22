@@ -1,12 +1,12 @@
-package Server;
+package Server.Command;
 
-public enum CommandsEnum {
+public enum PlayerCommandsEnum {
     JOIN_GAME("join_game"),
     CREATE_GAME("create_game");
 
     private final String string;
 
-    CommandsEnum(String s) {
+    PlayerCommandsEnum(final String s) {
         this.string = s;
     }
 

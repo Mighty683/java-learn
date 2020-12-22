@@ -3,8 +3,8 @@ package Engine.Entities;
 import Engine.Utils.Location;
 
 public abstract class AbstractInterfaceEntity implements InterfaceEntity {
-    private Location location;
     private final String name;
+    private Location location;
 
     protected AbstractInterfaceEntity(final Location location, final String name) {
         this.location = location;
@@ -12,12 +12,12 @@ public abstract class AbstractInterfaceEntity implements InterfaceEntity {
     }
 
     @Override
-    public void setLocation(final Location location) {
-        this.location = location;
+    public Location getLocation() {
+        return this.location;
     }
 
     @Override
-    public Location getLocation() {
-        return this.location;
+    public void setLocation(final Location location) {
+        this.location = location;
     }
 }

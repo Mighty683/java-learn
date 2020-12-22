@@ -1,22 +1,29 @@
 package Server;
 
+import Server.Command.Command;
+import Server.Command.PlayerCommandsEnum;
 import Server.GameRoom.GameRoom;
 import Server.GameRoom.IGameRoom;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class Server extends WebSocketGameServer implements AutoCloseable {
+    private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     Map<UUID, IGameRoom> gameRoomMap;
+
+    public Server(final InetSocketAddress address) {
+        super(address);
+        this.gameRoomMap = new HashMap<>();
+    }
 
     public Map<UUID, IGameRoom> getGameRoomMap() {
         return gameRoomMap;
-    }
-
-    public Server(InetSocketAddress address) {
-        super(address);
-        this.gameRoomMap = new HashMap<>();
     }
 
     @Override
@@ -25,25 +32,30 @@ public final class Server extends WebSocketGameServer implements AutoCloseable {
     }
 
     @Override
-    public void onCommand(IPlayerSocket playerSocket, Command command) {
-        if (command.command.equals(CommandsEnum.CREATE_GAME.toString())) {
+    public void onCommand(final IPlayerSocket playerSocket, final Command command) {
+        if (command.getCommand().equals(PlayerCommandsEnum.CREATE_GAME.toString())) {
             createGame(playerSocket);
         }
-        if (command.command.equals(CommandsEnum.JOIN_GAME.toString())) {
-            joinGame(command.data.get("id"), playerSocket);
+        if (command.getCommand().equals(PlayerCommandsEnum.JOIN_GAME.toString())) {
+            joinGame(command.getData().get("id"), playerSocket);
         }
+        logCommand(command);
     }
 
-    private void joinGame(String id, IPlayerSocket player) {
-        IGameRoom gameRoom = gameRoomMap.get(UUID.fromString(id));
+    private void joinGame(final String id, final IPlayerSocket player) {
+        final IGameRoom gameRoom = gameRoomMap.get(UUID.fromString(id));
         if (gameRoom != null) {
             gameRoom.addPlayer(player);
         }
     }
 
-    private void createGame(IPlayerSocket creator) {
-        GameRoom newGame = new GameRoom();
+    private void createGame(final IPlayerSocket creator) {
+        final GameRoom newGame = new GameRoom();
         newGame.addPlayer(creator);
         gameRoomMap.put(newGame.getId(), newGame);
+    }
+
+    private void logCommand(final Command cmd) {
+        LOGGER.log(Level.INFO, "Received command: " + cmd);
     }
 }

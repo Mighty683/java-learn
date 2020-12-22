@@ -1,6 +1,5 @@
 package Engine;
 
-import Engine.Entities.AbstractInterfaceEntity;
 import Engine.Entities.InterfaceDamageableEntity;
 import Engine.Entities.InterfaceEntity;
 import Engine.Events.InterfaceDamageLocationEvent;
@@ -22,8 +21,13 @@ public class Engine implements InterfaceEngine {
     }
 
     @Override
-    public void addEntity(final AbstractInterfaceEntity entity) {
+    public void addEntity(final InterfaceEntity entity) {
         this.entities.add(entity);
+    }
+
+    @Override
+    public void removeEntity(final InterfaceEntity entity) {
+        this.entities.remove(entity);
     }
 
     @Override

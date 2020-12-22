@@ -1,10 +1,9 @@
 package Server.GameRoom;
 
-import Server.Server;
-
+import Engine.Entities.Player;
 import Server.IPlayerSocket;
 
-import java.util.Set;
+import java.util.Collection;
 import java.util.UUID;
 
 public interface IGameRoom {
@@ -12,7 +11,11 @@ public interface IGameRoom {
 
     void removePlayer(IPlayerSocket socket);
 
-    Set<IPlayerSocket> getPlayersSet();
+    Collection<IPlayerSocket> getPlayerSocketCollection();
+
+    Collection<Player> getPlayerEntityCollection();
 
     UUID getId();
+
+    void start();
 }

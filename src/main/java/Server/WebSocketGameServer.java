@@ -1,5 +1,6 @@
 package Server;
 
+import Server.Command.Command;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 
@@ -8,37 +9,37 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class WebSocketGameServer extends org.java_websocket.server.WebSocketServer {
-    private Map<WebSocket, IPlayerSocket> playerSockets;
+    private final Map<WebSocket, IPlayerSocket> playerSockets;
 
-    public WebSocketGameServer(InetSocketAddress address) {
+    public WebSocketGameServer(final InetSocketAddress address) {
         super(address);
         this.playerSockets = new HashMap<>();
     }
 
     @Override
-    public void onOpen(WebSocket webSocket, ClientHandshake clientHandshake) {
+    public void onOpen(final WebSocket webSocket, final ClientHandshake clientHandshake) {
         this.playerSockets.put(webSocket, new PlayerSocket(webSocket));
     }
 
     @Override
-    public void onClose(WebSocket webSocket, int i, String s, boolean b) {
+    public void onClose(final WebSocket webSocket, final int i, final String s, final boolean b) {
         this.playerSockets.remove(webSocket);
     }
 
     @Override
-    public void onMessage(WebSocket webSocket, String message) {
-        IPlayerSocket playerSocket = this.playerSockets.get(webSocket);
+    public void onMessage(final WebSocket webSocket, final String message) {
+        final IPlayerSocket playerSocket = this.playerSockets.get(webSocket);
         if (playerSocket != null) {
             try {
                 this.onCommand(playerSocket, Command.fromJSONString(message));
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
     @Override
-    public void onError(WebSocket webSocket, Exception e) {
+    public void onError(final WebSocket webSocket, final Exception e) {
 
     }
 

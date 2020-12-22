@@ -1,5 +1,7 @@
 package Server;
 
+import Server.Command.Command;
+import Server.Command.PlayerCommandsEnum;
 import Server.GameRoom.IGameRoom;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -27,12 +29,12 @@ public class ServerTest {
             testServer.onCommand(
                     playerSocketMock,
                     new Command(
-                            CommandsEnum.CREATE_GAME.toString(),
+                            PlayerCommandsEnum.CREATE_GAME.toString(),
                             new HashMap<>()
                     )
             );
             //then
-            assertThat(testServer.getGameRoomMap().values().iterator().next().getPlayersSet()).contains(playerSocketMock);
+            assertThat(testServer.getGameRoomMap().values().iterator().next().getPlayerSocketCollection()).contains(playerSocketMock);
         }
 
         @Test
@@ -41,7 +43,7 @@ public class ServerTest {
             final Server testServer = new Server(inetSocketAddressMock);
             final IPlayerSocket playerSocketMock = mock(IPlayerSocket.class);
             final IPlayerSocket playerJoiningSocketMock = mock(IPlayerSocket.class);
-            testServer.onCommand(playerSocketMock, new Command(CommandsEnum.CREATE_GAME.toString(), new HashMap<>()));
+            testServer.onCommand(playerSocketMock, new Command(PlayerCommandsEnum.CREATE_GAME.toString(), new HashMap<>()));
             final IGameRoom gameRoom = testServer.getGameRoomMap().values().iterator().next();
             final Map<String, String> dataMap = new HashMap<>();
             dataMap.put("id", gameRoom.getId().toString());
@@ -49,12 +51,12 @@ public class ServerTest {
             testServer.onCommand(
                     playerJoiningSocketMock,
                     new Command(
-                            CommandsEnum.JOIN_GAME.toString(),
+                            PlayerCommandsEnum.JOIN_GAME.toString(),
                             dataMap
                     )
             );
             //then
-            assertThat(gameRoom.getPlayersSet()).contains(playerJoiningSocketMock);
+            assertThat(gameRoom.getPlayerSocketCollection()).contains(playerJoiningSocketMock);
         }
     }
 }

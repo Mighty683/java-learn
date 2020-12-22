@@ -1,38 +1,59 @@
 package Server.GameRoom;
 
 
+import Engine.Engine;
+import Engine.Entities.Player;
+import Engine.InterfaceEngine;
+import Engine.Utils.Location;
 import Server.IPlayerSocket;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class GameRoom implements IGameRoom {
-    private final Set<IPlayerSocket> playerSocketSet;
+    private final Map<IPlayerSocket, Player> playersMap;
     private final UUID id;
+    private final InterfaceEngine gameEngine;
 
     public GameRoom() {
-        this.playerSocketSet = new LinkedHashSet<>();
+        this.gameEngine = new Engine();
+        this.playersMap = new HashMap<>();
         this.id = UUID.randomUUID();
     }
 
     @Override
-    public void addPlayer(IPlayerSocket socket) {
-        this.playerSocketSet.add(socket);
+    public void addPlayer(final IPlayerSocket socket) {
+        final Player playerGameEntity = new Player(new Location(0, 0), 100, socket.getName());
+        this.gameEngine.addEntity(playerGameEntity);
+        this.playersMap.put(socket, playerGameEntity);
     }
 
     @Override
-    public void removePlayer(IPlayerSocket socket) {
-        this.playerSocketSet.remove(socket);
+    public void removePlayer(final IPlayerSocket socket) {
+        this.gameEngine.removeEntity(this.playersMap.get(socket));
+        this.playersMap.remove(socket);
     }
 
     @Override
-    public Set<IPlayerSocket> getPlayersSet() {
-        return this.playerSocketSet;
+    public Collection<IPlayerSocket> getPlayerSocketCollection() {
+        return this.playersMap.keySet();
+    }
+
+    @Override
+    public Collection<Player> getPlayerEntityCollection() {
+        return this.playersMap.values();
     }
 
     @Override
     public UUID getId() {
         return this.id;
+    }
+
+    @Override
+    public void start() {
+        // TODO: Threads work
+        this.gameEngine.tick();
     }
 }

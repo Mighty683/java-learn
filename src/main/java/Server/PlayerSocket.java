@@ -13,4 +13,9 @@ public class PlayerSocket implements IPlayerSocket {
     public void sendMessage(final String message) {
         this.socket.send(message);
     }
+
+    @Override
+    public String getName() {
+        return "";
+    }
 }
