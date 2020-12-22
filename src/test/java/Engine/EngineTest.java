@@ -1,6 +1,6 @@
 package Engine;
 
-import Engine.Entities.IMovableEntity;
+import Engine.Entities.InterfaceMovableEntity;
 import Engine.Entities.Player;
 import Engine.Events.DamageLocationEvent;
 import Engine.Events.MoveEntityEvent;
@@ -54,7 +54,7 @@ public class EngineTest {
             );
             final DamageLocationEvent damageEventSpy = spy(damageEvent);
             //when
-            testedEngine.addLocationEvent(damageEventSpy);
+            testedEngine.addDamageLocationEvent(damageEventSpy);
             testedEngine.addEntity(playerMock);
             testedEngine.addEntity(secondPlayer);
             testedEngine.tick();
@@ -69,7 +69,7 @@ public class EngineTest {
             final Engine testedEngine = new Engine();
             final MoveEntityEvent eventMock = new MoveEntityEvent(
                     testLocation,
-                    mock(IMovableEntity.class)
+                    mock(InterfaceMovableEntity.class)
             );
             //when
             testedEngine.addMoveEvent(eventMock);
@@ -85,7 +85,7 @@ public class EngineTest {
             final Engine testedEngine = new Engine();
             final MoveEntityEvent eventMock = spy(new MoveEntityEvent(
                     testLocation,
-                    mock(IMovableEntity.class)
+                    mock(InterfaceMovableEntity.class)
             ));
             final Player player = new Player(testLocation, 100, "player-name");
             //when

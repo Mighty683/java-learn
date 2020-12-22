@@ -1,18 +1,19 @@
 package Engine;
 
-import Engine.Entities.Entity;
-import Engine.Entities.IDamageableEntity;
-import Engine.Events.IMoveEvent;
-import Engine.Events.LocationEvent;
+import Engine.Entities.AbstractInterfaceEntity;
+import Engine.Entities.InterfaceDamageableEntity;
+import Engine.Entities.InterfaceEntity;
+import Engine.Events.InterfaceDamageLocationEvent;
+import Engine.Events.InterfaceMoveEvent;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Engine implements IEngine {
-    List<Entity> entities = new ArrayList<>();
-    List<LocationEvent> locationEvents = new ArrayList<>();
-    List<IMoveEvent> moveEvents = new ArrayList<>();
+public class Engine implements InterfaceEngine {
+    List<InterfaceEntity> entities = new ArrayList<>();
+    List<InterfaceDamageLocationEvent> locationEvents = new ArrayList<>();
+    List<InterfaceMoveEvent> moveEvents = new ArrayList<>();
 
     @Override
     public void tick() {
@@ -21,33 +22,33 @@ public class Engine implements IEngine {
     }
 
     @Override
-    public void addEntity(Entity entity) {
+    public void addEntity(final AbstractInterfaceEntity entity) {
         this.entities.add(entity);
     }
 
     @Override
-    public void addLocationEvent(LocationEvent locationEvent) {
+    public void addDamageLocationEvent(final InterfaceDamageLocationEvent locationEvent) {
         this.locationEvents.add(locationEvent);
     }
 
     @Override
-    public void addMoveEvent(IMoveEvent event) {
+    public void addMoveEvent(final InterfaceMoveEvent event) {
         this.moveEvents.add(event);
     }
 
     private void applyLocationEvents() {
         this.locationEvents
                 .forEach(event -> this.entities.forEach(entity -> {
-                    if (entity instanceof IDamageableEntity && entity.getLocation().equals(event.getLocation())) {
-                        event.applyEffect((IDamageableEntity) entity);
+                    if (entity instanceof InterfaceDamageableEntity && entity.getLocation().equals(event.getLocation())) {
+                        event.applyEffect((InterfaceDamageableEntity) entity);
                     }
                 }));
     }
 
     private void applyMoveEvents() {
-        Iterator<IMoveEvent> iterator = this.moveEvents.iterator();
+        final Iterator<InterfaceMoveEvent> iterator = this.moveEvents.iterator();
         while (iterator.hasNext()) {
-            IMoveEvent event = iterator.next();
+            final InterfaceMoveEvent event = iterator.next();
             if (this.entities.stream().allMatch(
                     entity -> entity.getLocation().equals(event.getLocation()) && entity.canMoveHere())
             ) {

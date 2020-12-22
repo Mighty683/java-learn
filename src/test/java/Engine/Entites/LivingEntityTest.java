@@ -1,6 +1,6 @@
 package Engine.Entites;
 
-import Engine.Entities.LivingEntity;
+import Engine.Entities.AbstractInterfaceLivingEntity;
 import Engine.Utils.Location;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ public class LivingEntityTest {
     @Test
     public void damageApply() {
         //given
-        final LivingEntity testEntity = new LivingEntity(
+        final AbstractInterfaceLivingEntity testEntity = new AbstractInterfaceLivingEntity(
                 mock(Location.class),
                 "test-entity",
                 100
@@ -31,7 +31,7 @@ public class LivingEntityTest {
     @Test
     public void killingDamageApply() {
         //given
-        final LivingEntity testEntity = new LivingEntity(
+        final AbstractInterfaceLivingEntity testEntity = new AbstractInterfaceLivingEntity(
                 mock(Location.class),
                 "test-entity",
                 100

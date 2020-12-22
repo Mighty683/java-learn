@@ -1,13 +1,13 @@
 package Engine.Events;
 
-import Engine.Entities.IMovableEntity;
+import Engine.Entities.InterfaceMovableEntity;
 import Engine.Utils.Location;
 
-public class MoveEntityEvent implements IMoveEvent {
+public class MoveEntityEvent implements InterfaceMoveEvent {
     Location location;
-    IMovableEntity entity;
+    InterfaceMovableEntity entity;
 
-    public MoveEntityEvent(Location location, IMovableEntity entity) {
+    public MoveEntityEvent(final Location location, final InterfaceMovableEntity entity) {
         this.location = location;
         this.entity = entity;
     }

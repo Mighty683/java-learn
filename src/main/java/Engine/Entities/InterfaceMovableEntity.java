@@ -2,6 +2,6 @@ package Engine.Entities;
 
 import Engine.Utils.Location;
 
-public interface IMovableEntity {
+public interface InterfaceMovableEntity {
     void move(Location location);
 }
