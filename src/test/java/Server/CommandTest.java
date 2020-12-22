@@ -28,7 +28,7 @@ public class CommandTest {
                             + "\"cmd\": \"commandWithData\","
                             + "\"data\": {"
                             + "\"key1\": \"value1\","
-                            + "\"key2\": \"value2\"d"
+                            + "\"key2\": \"value2\""
                             + "}"
                             + "}"
             );

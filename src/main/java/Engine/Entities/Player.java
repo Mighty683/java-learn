@@ -6,7 +6,7 @@ public class Player extends AbstractInterfaceLivingEntity implements InterfacePl
     private final String playerName;
 
     public Player(final Location location, final int hp, final String playerName) {
-        super(location, "player", hp);
+        super(location, EntitiesNames.PLAYER, hp);
         this.playerName = playerName;
     }
 

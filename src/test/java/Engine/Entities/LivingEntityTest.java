@@ -1,6 +1,5 @@
-package Engine.Entites;
+package Engine.Entities;
 
-import Engine.Entities.AbstractInterfaceLivingEntity;
 import Engine.Utils.Location;
 import org.junit.jupiter.api.Test;
 

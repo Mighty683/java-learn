@@ -67,10 +67,10 @@ public class EngineTest {
         public void tickMove() {
             //given
             final Engine testedEngine = new Engine();
-            final MoveEntityEvent eventMock = new MoveEntityEvent(
+            final MoveEntityEvent eventMock = spy(new MoveEntityEvent(
                     testLocation,
                     mock(InterfaceMovableEntity.class)
-            );
+            ));
             //when
             testedEngine.addMoveEvent(eventMock);
             testedEngine.tick();
