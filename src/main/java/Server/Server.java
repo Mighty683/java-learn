@@ -1,6 +1,7 @@
 package Server;
 
 import Server.Command.Command;
+import Server.Command.CommandFactory;
 import Server.Command.PlayerCommandsEnum;
 import Server.GameRoom.GameRoom;
 import Server.GameRoom.IGameRoom;
@@ -13,12 +14,12 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class Server extends WebSocketGameServer implements AutoCloseable {
+public final class Server extends AbstractWebSocketGameServer implements AutoCloseable {
     private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     Map<UUID, IGameRoom> gameRoomMap;
 
-    public Server(final InetSocketAddress address) {
-        super(address);
+    public Server(final InetSocketAddress address, final CommandFactory commandFactory) {
+        super(address, commandFactory);
         this.gameRoomMap = new HashMap<>();
     }
 

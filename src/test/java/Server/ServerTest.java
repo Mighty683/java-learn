@@ -1,8 +1,10 @@
 package Server;
 
 import Server.Command.Command;
+import Server.Command.CommandFactory;
 import Server.Command.PlayerCommandsEnum;
 import Server.GameRoom.IGameRoom;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,12 @@ import static org.mockito.Mockito.mock;
 
 public class ServerTest {
     private final InetSocketAddress inetSocketAddressMock = mock(InetSocketAddress.class);
+    private Server testServer;
+
+    @BeforeEach
+    void setup() {
+        testServer = new Server(inetSocketAddressMock, mock(CommandFactory.class));
+    }
 
     @Nested
     @DisplayName("Testing Server Commands")
@@ -23,7 +31,6 @@ public class ServerTest {
         @Test
         void createGame() {
             //given
-            final Server testServer = new Server(inetSocketAddressMock);
             final IPlayerSocket playerSocketMock = mock(IPlayerSocket.class);
             //when
             testServer.onCommand(
@@ -40,7 +47,6 @@ public class ServerTest {
         @Test
         void joinGame() {
             //given
-            final Server testServer = new Server(inetSocketAddressMock);
             final IPlayerSocket playerSocketMock = mock(IPlayerSocket.class);
             final IPlayerSocket playerJoiningSocketMock = mock(IPlayerSocket.class);
             testServer.onCommand(playerSocketMock, new Command(PlayerCommandsEnum.CREATE_GAME.toString(), new HashMap<>()));

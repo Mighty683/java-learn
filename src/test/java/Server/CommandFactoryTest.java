@@ -1,6 +1,7 @@
 package Server;
 
 import Server.Command.Command;
+import Server.Command.CommandFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -9,14 +10,16 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CommandTest {
+public class CommandFactoryTest {
+    private static final CommandFactory commandFactory = CommandFactory.getInstance();
+
     @Nested
     @DisplayName("Testing json parsing")
     class FromJSONParse {
         @Test
         void commandParse() throws IOException {
             //when
-            final Command testCommand = Command.fromJSONString("{\"cmd\":\"command\"}");
+            final Command testCommand = commandFactory.fromJSONString("{\"cmd\":\"command\"}");
             //then
             assertThat(testCommand.getCommand()).isEqualTo("command");
         }
@@ -24,7 +27,7 @@ public class CommandTest {
         @Test
         void dataParse() throws IOException {
             //when
-            final Command testCommand = Command.fromJSONString(
+            final Command testCommand = commandFactory.fromJSONString(
                     "{"
                             + "\"cmd\": \"commandWithData\","
                             + "\"data\": {"

@@ -1,6 +1,7 @@
 package Server;
 
 import Server.Command.Command;
+import Server.Command.CommandFactory;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 
@@ -8,12 +9,18 @@ import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class WebSocketGameServer extends org.java_websocket.server.WebSocketServer {
+public abstract class AbstractWebSocketGameServer extends org.java_websocket.server.WebSocketServer {
     private final Map<WebSocket, IPlayerSocket> playerSockets;
+    private final CommandFactory commandFactory;
 
-    public WebSocketGameServer(final InetSocketAddress address) {
+    public AbstractWebSocketGameServer(final InetSocketAddress address, final CommandFactory commandFactory) {
         super(address);
         this.playerSockets = new HashMap<>();
+        this.commandFactory = commandFactory;
+    }
+
+    public Map<WebSocket, IPlayerSocket> getPlayerSockets() {
+        return playerSockets;
     }
 
     @Override
@@ -31,7 +38,7 @@ public abstract class WebSocketGameServer extends org.java_websocket.server.WebS
         final IPlayerSocket playerSocket = this.playerSockets.get(webSocket);
         if (playerSocket != null) {
             try {
-                this.onCommand(playerSocket, Command.fromJSONString(message));
+                this.onCommand(playerSocket, commandFactory.fromJSONString(message));
             } catch (final Exception e) {
                 e.printStackTrace();
             }
@@ -40,7 +47,7 @@ public abstract class WebSocketGameServer extends org.java_websocket.server.WebS
 
     @Override
     public void onError(final WebSocket webSocket, final Exception e) {
-
+        // TODO: What can I do on error?
     }
 
     @Override

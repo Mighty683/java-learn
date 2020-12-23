@@ -1,3 +1,4 @@
+import Server.Command.CommandFactory;
 import Server.Server;
 
 import java.io.BufferedReader;
@@ -6,7 +7,7 @@ import java.net.InetSocketAddress;
 
 public class Game {
     public static void main(final String[] args) {
-        try (final Server server = new Server(new InetSocketAddress("localhost", 8080))) {
+        try (final Server server = new Server(new InetSocketAddress("localhost", 8080), CommandFactory.getInstance())) {
             server.start();
             final BufferedReader sysin = new BufferedReader(new InputStreamReader(System.in));
             while (true) {
