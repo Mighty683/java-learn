@@ -1,17 +1,16 @@
-package Engine.Entites;
+package Engine.Entities;
 
-import Engine.Entities.LivingEntity;
 import Engine.Utils.Location;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class LivingEntityTest {
     @Test
     public void damageApply() {
         //given
-        LivingEntity testEntity = new LivingEntity(
+        final AbstractInterfaceLivingEntity testEntity = new AbstractInterfaceLivingEntity(
                 mock(Location.class),
                 "test-entity",
                 100
@@ -31,7 +30,7 @@ public class LivingEntityTest {
     @Test
     public void killingDamageApply() {
         //given
-        LivingEntity testEntity = new LivingEntity(
+        final AbstractInterfaceLivingEntity testEntity = new AbstractInterfaceLivingEntity(
                 mock(Location.class),
                 "test-entity",
                 100

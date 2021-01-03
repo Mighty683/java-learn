@@ -10,11 +10,11 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 public class MoveEntityEventTest {
     @Test
-    public void applyMoveEffect () {
+    public void applyMoveEffect() {
         //given
-        Player playerMock = mock(Player.class);
-        Location newLocation = mock(Location.class);
-        MoveEntityEvent event = new MoveEntityEvent(newLocation, playerMock);
+        final Player playerMock = mock(Player.class);
+        final Location newLocation = mock(Location.class);
+        final MoveEntityEvent event = new MoveEntityEvent(newLocation, playerMock);
         //when
         event.applyMoveEffect();
         //then

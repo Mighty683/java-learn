@@ -2,30 +2,35 @@ package Engine.Entities;
 
 import Engine.Utils.Location;
 
-public abstract class LivingEntity extends Entity implements IDamageableEntity, IMovableEntity {
+/**
+ * Skeleton implementation of interface
+ */
+public abstract class AbstractInterfaceLivingEntity extends AbstractInterfaceEntity implements InterfaceLivingEntity {
     private int hp;
     private boolean alive;
 
-    protected LivingEntity(Location location, String name, int hp) {
+    protected AbstractInterfaceLivingEntity(final Location location, final String name, final int hp) {
         super(location, name);
         this.hp = hp;
     }
 
     @Override
-    public void applyDamage(int damage) {
+    public void applyDamage(final int damage) {
         this.hp = this.hp - damage;
         this.alive = this.hp > 0;
     }
 
     @Override
-    public void move(Location location) {
+    public void move(final Location location) {
         this.setLocation(location);
     }
 
+    @Override
     public int getHp() {
         return hp;
     }
 
+    @Override
     public boolean isAlive() {
         return this.alive;
     }

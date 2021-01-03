@@ -5,7 +5,8 @@ import java.util.Objects;
 public class Location {
     public int axisX;
     public int axisY;
-    public Location (int axisX, int axisY) {
+
+    public Location(int axisX, int axisY) {
         this.axisX = axisX;
         this.axisY = axisY;
     }
