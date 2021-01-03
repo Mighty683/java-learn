@@ -34,7 +34,7 @@ public class EngineTest {
         assertThat(testedEngine.entities).contains(player);
     }
     @Nested
-    @DisplayName("Tests for engine tics")
+    @DisplayName("Tests for engine ticks")
     public class TickEffects {
         @Test
         public void tickLocationEffects() {
@@ -45,7 +45,13 @@ public class EngineTest {
                     100,
                     "player-event"
             );
-            Player playerMock = spy(new Player(testLocation, 100, "player-name"));
+            Player playerMock = spy(
+                    new Player(
+                            testLocation,
+                            100,
+                            "player-name"
+                    )
+            );
             DamageLocationEvent damageEvent = new DamageLocationEvent(
                     20,
                     testLocation
@@ -64,10 +70,10 @@ public class EngineTest {
         public void tickMove() {
             //given
             Engine testedEngine = new Engine();
-            MoveEntityEvent eventMock = new MoveEntityEvent(
+            MoveEntityEvent eventMock = spy(new MoveEntityEvent(
                     testLocation,
                     mock(IMovableEntity.class)
-            );
+            ));
             //when
             testedEngine.addMoveEvent(eventMock);
             testedEngine.tick();
