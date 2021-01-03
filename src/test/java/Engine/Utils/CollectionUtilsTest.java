@@ -6,9 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,5 +22,16 @@ public class CollectionUtilsTest {
         );
         //then
         assertThat(CollectionUtils.max(numberCollection)).isEqualTo(df.parse("2020-01-03"));
+    }
+
+    @Test
+    void testSwap() {
+        //given
+        List<Number> testList = Arrays.asList(1,2,3);
+        //when
+        CollectionUtils.swap(testList, 1, 2);
+        //then
+        assertThat(testList.get(1)).isEqualTo(3);
+        assertThat(testList.get(2)).isEqualTo(2);
     }
 }

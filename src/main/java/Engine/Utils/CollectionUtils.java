@@ -1,6 +1,7 @@
 package Engine.Utils;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 public class CollectionUtils {
@@ -23,5 +24,20 @@ public class CollectionUtils {
             }
         }
         return result;
+    }
+
+    /**
+     * Hiding generic type with private helper method
+     * it's good for public API
+     * @param l - list
+     * @param sourceIndex - source swap index
+     * @param destinationIndex - destination swap index
+     */
+    public static void swap(List<?> l, int sourceIndex, int destinationIndex) {
+        swapHelper(l, sourceIndex, destinationIndex);
+    }
+
+    private static <E> void swapHelper(List<E> l, int sourceIndex, int destinationIndex) {
+        l.set(sourceIndex, l.set(destinationIndex, l.get(sourceIndex)));
     }
 }
